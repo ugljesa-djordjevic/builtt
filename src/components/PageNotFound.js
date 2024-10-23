@@ -21,7 +21,7 @@ const PageNotFound = () => {
         <div className="four">4</div>
         <div className="four">4</div>
         <div className="btn">
-          <Link to="/products">BACK TO HOME</Link>
+          <Link to="/">BACK TO HOME</Link>
         </div>
       </div>
       </div>

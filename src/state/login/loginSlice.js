@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
-
 const initialState = {
     loading: false,
-    userInfo: {}, // for user object
+    userInfo: {
+        email: "ugljesadjordjevic@gmail.com",
+        password: "Ugi12345!",
+    }, // for hardcoded user object
     userToken: null, // for storing the JWT
     error: null,
     success: false, // for monitoring the registration process.
