@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { decreaseCart, removeFromCart, addToCart } from '../state/cart/cartSlice';
+import { decreaseCart, removeFromCart, addToCart, getTotals } from '../state/cart/cartSlice';
 
 function Cart() {
   const [loading, setLoading] = useState(false);
@@ -14,12 +14,17 @@ function Cart() {
   const navigate = useNavigate();
   const userToken = localStorage.getItem('userToken');
 
-  let cartContent = JSON.parse(localStorage.getItem('cart-content'));
+  let cartContent = JSON.parse(localStorage.getItem('cartItems'));
+
   useEffect(() => {
     if (!userToken) {
       navigate('/');
     }
-  }, [navigate, userToken])
+  }, [navigate, userToken]);
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cart, dispatch]);
 
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
@@ -65,7 +70,7 @@ function Cart() {
                           </div>
                         </div>
                         <div style={{ display: "flex", gap: ".25rem" }}>
-                          <h3>{el.price}</h3>
+                          <h3>{el.price * el.cartQuantity}</h3>
                           <span>RSD</span>
                         </div>
                       </div>
@@ -84,7 +89,7 @@ function Cart() {
                     <div className="cart__container-summary-item">
                       <h3>Usteda</h3>
                       <div style={{ display: "flex", gap: ".25rem" }}>
-                        <p>-1.200</p>
+                        <p>-1200</p>
                         <span>RSD</span>
                       </div>
                     </div>

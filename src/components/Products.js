@@ -17,7 +17,7 @@ function Products() {
   const userToken = localStorage.getItem('userToken');
 
   useEffect(() => {
-    let cartContent = JSON.parse(localStorage.getItem("cart-content"));
+    let cartContent = JSON.parse(localStorage.getItem("cartItems"));
     if (cartContent) setNumOfProducts(cartContent.length);
     if (!userToken) {
       navigate('/');
@@ -25,7 +25,7 @@ function Products() {
   }, [navigate, userToken]);
 
   const handleAddToCart = (product) => {
-    let cartContent = JSON.parse(localStorage.getItem("cart-content"));
+    let cartContent = JSON.parse(localStorage.getItem("cartItems"));
 
     dispatch(addToCart(product));
 
@@ -36,7 +36,6 @@ function Products() {
       cartContent = filteredProduct;
     }
     setNumOfProducts(cartContent.length)
-    localStorage.setItem('cart-content', JSON.stringify(cartContent));
   }
 
   return (
